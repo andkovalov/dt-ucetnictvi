@@ -21,7 +21,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=9">
+  <link rel="stylesheet" href="assets/style.css?v=10">
+  <script src="assets/consent.js?v=1"></script>
 
   <script type="application/ld+json">
   {
@@ -584,6 +585,14 @@
           <p class="micro">Rezervace přes Reservio · potvrzení a odkaz na videohovor e-mailem</p>
         </div>
       </div>
+      <div class="container">
+        <div class="contact-map reveal">
+          <iframe
+            title="Mapa — Michelská 18/12a, Praha 4 – Michle"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=14.4493%2C50.0516%2C14.4573%2C50.0556&amp;layer=mapnik&amp;marker=50.0536%2C14.4533"
+            width="100%" height="400" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -596,7 +605,8 @@
       <div class="footer-meta">
         DT účetnictví Praha s.r.o. · IČO: 17686181<br>
         Michelská 18/12a, Praha 4 – Michle, 140 00<br>
-        © 2026 · <a href="tel:+420704155141">+420 704 155 141</a> · <a href="mailto:uctoo@email.cz">uctoo@email.cz</a>
+        © 2026 · <a href="tel:+420704155141">+420 704 155 141</a> · <a href="mailto:uctoo@email.cz">uctoo@email.cz</a><br>
+        <a href="zasady.html">Zásady ochrany osobních údajů</a> · <button type="button" class="footer-link" data-consent="open">Nastavení cookies</button>
       </div>
     </div>
   </footer>
@@ -641,6 +651,19 @@
     ]
   }
   </script>
+
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Souhlas s používáním cookies" hidden>
+    <div class="cookie-inner">
+      <div class="cookie-text">
+        <strong>Cookies a soukromí</strong>
+        <p>Používáme jen nezbytné cookies pro fungování webu. Analytické a marketingové cookies aktivujeme pouze s vaším souhlasem. Více v <a href="zasady.html">zásadách ochrany osobních údajů</a>.</p>
+      </div>
+      <div class="cookie-actions">
+        <button type="button" class="btn btn-secondary" data-consent="deny">Odmítnout</button>
+        <button type="button" class="btn btn-primary" data-consent="accept">Přijmout vše</button>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>

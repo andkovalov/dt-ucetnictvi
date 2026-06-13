@@ -21,7 +21,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=9">
+  <link rel="stylesheet" href="assets/style.css?v=10">
+  <script src="assets/consent.js?v=1"></script>
 
   <script type="application/ld+json">
   {
@@ -584,6 +585,14 @@
           <p class="micro">Запис через Reservio · підтвердження та посилання на відеодзвінок на e-mail</p>
         </div>
       </div>
+      <div class="container">
+        <div class="contact-map reveal">
+          <iframe
+            title="Мапа — Michelská 18/12a, Praha 4 – Michle"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=14.4493%2C50.0516%2C14.4573%2C50.0556&amp;layer=mapnik&amp;marker=50.0536%2C14.4533"
+            width="100%" height="400" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -596,7 +605,8 @@
       <div class="footer-meta">
         DT účetnictví Praha s.r.o. · IČO: 17686181<br>
         Michelská 18/12a, Praha 4 – Michle, 140 00<br>
-        © 2026 · <a href="tel:+420704155141">+420 704 155 141</a> · <a href="mailto:uctoo@email.cz">uctoo@email.cz</a>
+        © 2026 · <a href="tel:+420704155141">+420 704 155 141</a> · <a href="mailto:uctoo@email.cz">uctoo@email.cz</a><br>
+        <a href="zasady-ua.html">Політика конфіденційності</a> · <button type="button" class="footer-link" data-consent="open">Налаштування cookies</button>
       </div>
     </div>
   </footer>
@@ -606,6 +616,19 @@
     <a class="btn btn-secondary btn-call" href="tel:+420704155141" aria-label="Зателефонувати">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
     </a>
+  </div>
+
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Згода на використання cookies" hidden>
+    <div class="cookie-inner">
+      <div class="cookie-text">
+        <strong>Cookies і приватність</strong>
+        <p>Ми використовуємо лише необхідні cookies для роботи сайту. Аналітичні та маркетингові cookies вмикаємо тільки за вашою згодою. Докладніше в <a href="zasady-ua.html">політиці конфіденційності</a>.</p>
+      </div>
+      <div class="cookie-actions">
+        <button type="button" class="btn btn-secondary" data-consent="deny">Відхилити</button>
+        <button type="button" class="btn btn-primary" data-consent="accept">Прийняти все</button>
+      </div>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>

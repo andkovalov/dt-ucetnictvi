@@ -614,6 +614,85 @@ a.contact-item:hover { transform: translateY(-3px); box-shadow: var(--shadow-car
 .contact-cta-card .btn { width: 100%; margin-top: 16px; }
 .contact-cta-card .micro { margin-top: 14px; text-align: center; font-size: .82rem; color: var(--ink-50); }
 
+/* ---------- Contact map ---------- */
+
+.contact-map {
+  margin-top: clamp(28px, 4vw, 48px);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
+  line-height: 0;
+}
+.contact-map iframe {
+  width: 100%;
+  height: clamp(280px, 36vw, 420px);
+  border: 0;
+  display: block;
+}
+
+/* ---------- Cookie banner ---------- */
+
+.cookie-banner {
+  position: fixed;
+  left: 16px; right: 16px; bottom: 16px;
+  z-index: 200;
+  max-width: 760px;
+  margin-inline: auto;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-pop);
+  padding: 20px 24px;
+  transform: translateY(150%);
+  opacity: 0;
+  transition: transform .45s cubic-bezier(.7,0,.3,1), opacity .3s ease;
+}
+.cookie-banner.show { transform: translateY(0); opacity: 1; }
+.cookie-inner { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.cookie-text { flex: 1; min-width: 240px; }
+.cookie-text strong { display: block; font-size: 1rem; margin-bottom: 4px; }
+.cookie-text p { font-size: .88rem; color: var(--ink-70); margin: 0; }
+.cookie-text a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.cookie-actions { display: flex; gap: 10px; flex-shrink: 0; }
+.cookie-actions .btn { padding: 12px 22px; font-size: .9rem; box-shadow: none; }
+
+.footer-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font: inherit;
+  padding: 0;
+}
+.footer-link:hover { color: var(--white); }
+
+/* ---------- Legal pages (zásady) ---------- */
+
+.legal { padding-top: calc(var(--header-h) + clamp(40px, 6vw, 72px)); padding-bottom: clamp(56px, 7vw, 96px); }
+.legal .container { max-width: 820px; }
+.legal h1 { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 10px; }
+.legal .lead { color: var(--ink-70); margin-bottom: 8px; font-size: 1.08rem; }
+.legal h2 { font-size: 1.4rem; margin: 38px 0 12px; }
+.legal h3 { font-size: 1.08rem; margin: 22px 0 8px; }
+.legal p, .legal li { color: var(--ink-70); font-size: 1rem; }
+.legal p { margin-bottom: 12px; }
+.legal ul { padding-left: 22px; list-style: disc; margin-bottom: 12px; }
+.legal li { margin-bottom: 6px; }
+.legal a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.legal table { width: 100%; border-collapse: collapse; margin: 10px 0 18px; }
+.legal table td { padding: 9px 0; border-bottom: 1px solid var(--line); font-size: .95rem; vertical-align: top; }
+.legal table td:first-child { color: var(--ink); font-weight: 700; width: 36%; }
+.legal-updated { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--ink-50); }
+.legal-back { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 28px; font-weight: 600; color: var(--accent); }
+.legal-back:hover { color: var(--accent-deep); }
+.legal-page .header-actions .lang-switch { display: flex; }
+.legal-page .header {
+  background: rgba(245, 247, 245, .9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 var(--line);
+}
+
 /* ---------- Footer ---------- */
 
 .footer { background: var(--accent-deep); color: rgba(255,255,255,.7); padding: 48px 0; font-size: .9rem; }
@@ -685,6 +764,7 @@ html.no-motion .reveal, html.no-js .reveal { opacity: 1; }
   body { font-size: 16px; padding-bottom: 84px; }
   .header-actions .btn-primary, .header-actions .lang-switch { display: none; }
   .mobile-cta { display: flex; }
+  .cookie-banner { bottom: calc(80px + env(safe-area-inset-bottom)); }
 }
 
 @media (max-width: 560px) {
@@ -694,6 +774,8 @@ html.no-motion .reveal, html.no-js .reveal { opacity: 1; }
   .number-card { padding: 20px 18px; }
   .hero-cta .btn { width: 100%; white-space: normal; }
   .mobile-cta .btn { white-space: normal; }
+  .cookie-actions { width: 100%; }
+  .cookie-actions .btn { flex: 1; }
   .pricing-tabs { width: 100%; }
   .pricing-tab { flex: 1; padding: 12px 10px; font-size: .86rem; }
 }
