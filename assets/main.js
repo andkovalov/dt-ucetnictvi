@@ -84,27 +84,54 @@
     });
   });
 
-  /* ---------- Map (Leaflet + OpenStreetMap tiles) ---------- */
+  /* ---------- Map (Leaflet + OSM, lazy-loaded when near viewport) ---------- */
   var mapEl = document.getElementById("map");
-  if (mapEl && typeof L !== "undefined") {
-    var lat = 50.0536, lng = 14.4533;
-    var map = L.map(mapEl, {
-      scrollWheelZoom: false,
-      attributionControl: false
-    }).setView([lat, lng], 16);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19
-    }).addTo(map);
-    L.control.attribution({ prefix: false, position: "bottomleft" })
-      .addAttribution('&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>')
-      .addTo(map);
-    var pin = L.divIcon({
-      className: "map-pin",
-      html: '<svg width="32" height="32" viewBox="0 0 24 24" fill="#235943" stroke="#ffffff" stroke-width="1.4" aria-hidden="true"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7z"/><circle cx="12" cy="9" r="2.6" fill="#ffffff"/></svg>',
-      iconSize: [32, 32],
-      iconAnchor: [16, 30]
-    });
-    L.marker([lat, lng], { icon: pin, title: "DT účetnictví Praha" }).addTo(map);
+  if (mapEl) {
+    var mapLoaded = false;
+
+    function initMap() {
+      var lat = 50.0536, lng = 14.4533;
+      var map = L.map(mapEl, { scrollWheelZoom: false, attributionControl: false }).setView([lat, lng], 16);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19 }).addTo(map);
+      L.control.attribution({ prefix: false, position: "bottomleft" })
+        .addAttribution('&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>')
+        .addTo(map);
+      var pin = L.divIcon({
+        className: "map-pin",
+        html: '<svg width="32" height="32" viewBox="0 0 24 24" fill="#235943" stroke="#ffffff" stroke-width="1.4" aria-hidden="true"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7z"/><circle cx="12" cy="9" r="2.6" fill="#ffffff"/></svg>',
+        iconSize: [32, 32],
+        iconAnchor: [16, 30]
+      });
+      L.marker([lat, lng], { icon: pin, title: "DT účetnictví Praha" }).addTo(map);
+    }
+
+    function loadMap() {
+      if (mapLoaded) return;
+      mapLoaded = true;
+      var css = document.createElement("link");
+      css.rel = "stylesheet";
+      css.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+      css.integrity = "sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H";
+      css.crossOrigin = "";
+      document.head.appendChild(css);
+      var s = document.createElement("script");
+      s.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+      s.integrity = "sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH";
+      s.crossOrigin = "anonymous";
+      s.onload = initMap;
+      document.body.appendChild(s);
+    }
+
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { loadMap(); io.disconnect(); }
+        });
+      }, { rootMargin: "300px" });
+      io.observe(mapEl);
+    } else {
+      loadMap();
+    }
   }
 
   if (!hasGsap || reduceMotion) return;
