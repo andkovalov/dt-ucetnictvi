@@ -84,6 +84,29 @@
     });
   });
 
+  /* ---------- Map (Leaflet + OpenStreetMap tiles) ---------- */
+  var mapEl = document.getElementById("map");
+  if (mapEl && typeof L !== "undefined") {
+    var lat = 50.0536, lng = 14.4533;
+    var map = L.map(mapEl, {
+      scrollWheelZoom: false,
+      attributionControl: false
+    }).setView([lat, lng], 16);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19
+    }).addTo(map);
+    L.control.attribution({ prefix: false, position: "bottomleft" })
+      .addAttribution('&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>')
+      .addTo(map);
+    var pin = L.divIcon({
+      className: "map-pin",
+      html: '<svg width="32" height="32" viewBox="0 0 24 24" fill="#235943" stroke="#ffffff" stroke-width="1.4" aria-hidden="true"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7z"/><circle cx="12" cy="9" r="2.6" fill="#ffffff"/></svg>',
+      iconSize: [32, 32],
+      iconAnchor: [16, 30]
+    });
+    L.marker([lat, lng], { icon: pin, title: "DT účetnictví Praha" }).addTo(map);
+  }
+
   if (!hasGsap || reduceMotion) return;
 
   /* ---------- GSAP ---------- */
