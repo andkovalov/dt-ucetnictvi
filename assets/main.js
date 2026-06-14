@@ -172,7 +172,7 @@
       {
         y: 0,
         opacity: 1,
-        duration: 0.8,
+        duration: 0.55,
         ease: "power3.out",
         scrollTrigger: { trigger: el, start: "top 86%" },
         clearProps: "transform"
