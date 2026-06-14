@@ -33,8 +33,8 @@
   <link rel="preconnect" href="https://unpkg.com" crossorigin>
   <link rel="dns-prefetch" href="https://tile.openstreetmap.org">
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-  <link rel="stylesheet" href="assets/style.css?v=12">
-  <script src="assets/consent.js?v=3" defer></script>
+  <link rel="stylesheet" href="assets/style.css?v=13">
+  <script src="assets/consent.js?v=4" defer></script>
 
   <script type="application/ld+json">
   {
@@ -425,7 +425,7 @@
         <div>
           <div class="section-head reveal" style="margin-bottom:0">
             <span class="eyebrow">Про нас</span>
-            <h2>Бухгалтерія з особистим підходом, а не анонімний кол-центр</h2>
+            <h2>Бухгалтерія з особистим підходом</h2>
             <p>Ми — празька бухгалтерська компанія DT účetnictví Praha s.r.o. Допомагаємо підприємцям і фірмам тримати фінанси під контролем — зрозуміло, надійно та завжди вчасно.</p>
           </div>
           <div class="why-list">
@@ -454,15 +454,6 @@
               <div>
                 <h3>Індивідуальний підхід</h3>
                 <p>Послуги підлаштовуємо під ваш бізнес. Жодних шаблонів — рішення саме під ваші потреби.</p>
-              </div>
-            </div>
-            <div class="why-item">
-              <span class="why-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-              </span>
-              <div>
-                <h3>Чеською та українською</h3>
-                <p>Усе пояснимо мовою, яку ви розумієте. Допомагаємо з бізнесом і тим, хто нещодавно в Чехії.</p>
               </div>
             </div>
           </div>
@@ -637,8 +628,24 @@
         <strong>Cookies і приватність</strong>
         <p>Ми використовуємо лише необхідні cookies для роботи сайту. Аналітичні та маркетингові cookies вмикаємо тільки за вашою згодою. Докладніше в <a href="zasady-ua.html">політиці конфіденційності</a>.</p>
       </div>
+      <div class="cookie-options">
+        <label class="cookie-opt">
+          <span><strong>Необхідні</strong><small>Потрібні для роботи сайту — завжди активні.</small></span>
+          <input type="checkbox" checked disabled aria-label="Необхідні cookies (завжди активні)">
+        </label>
+        <label class="cookie-opt">
+          <span><strong>Аналітичні</strong><small>Анонімна статистика відвідувань.</small></span>
+          <input type="checkbox" data-cat="analytics" aria-label="Аналітичні cookies">
+        </label>
+        <label class="cookie-opt">
+          <span><strong>Маркетингові</strong><small>Вимірювання реклами та ремаркетинг.</small></span>
+          <input type="checkbox" data-cat="marketing" aria-label="Маркетингові cookies">
+        </label>
+      </div>
       <div class="cookie-actions">
+        <button type="button" class="btn btn-ghost" data-consent="settings">Налаштування</button>
         <button type="button" class="btn btn-secondary" data-consent="deny">Відхилити</button>
+        <button type="button" class="btn btn-primary" data-consent="save">Зберегти вибір</button>
         <button type="button" class="btn btn-primary" data-consent="accept">Прийняти все</button>
       </div>
     </div>

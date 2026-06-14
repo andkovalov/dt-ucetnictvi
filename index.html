@@ -33,8 +33,8 @@
   <link rel="preconnect" href="https://unpkg.com" crossorigin>
   <link rel="dns-prefetch" href="https://tile.openstreetmap.org">
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-  <link rel="stylesheet" href="assets/style.css?v=12">
-  <script src="assets/consent.js?v=3" defer></script>
+  <link rel="stylesheet" href="assets/style.css?v=13">
+  <script src="assets/consent.js?v=4" defer></script>
 
   <script type="application/ld+json">
   {
@@ -425,7 +425,7 @@
         <div>
           <div class="section-head reveal" style="margin-bottom:0">
             <span class="eyebrow">O nás</span>
-            <h2>Účetnictví s osobním přístupem, ne anonymní linka</h2>
+            <h2>Účetnictví s osobním přístupem</h2>
             <p>Jsme pražská účetní kancelář DT účetnictví Praha s.r.o. Pomáháme podnikatelům a firmám mít finance pod kontrolou — srozumitelně, spolehlivě a vždy v termínu.</p>
           </div>
           <div class="why-list">
@@ -454,15 +454,6 @@
               <div>
                 <h3>Individuální přístup</h3>
                 <p>Služby šijeme na míru vašemu podnikání. Žádná šablona — řešení přesně podle vašich potřeb.</p>
-              </div>
-            </div>
-            <div class="why-item">
-              <span class="why-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-              </span>
-              <div>
-                <h3>Česky i ukrajinsky</h3>
-                <p>Vše vám vysvětlíme v jazyce, kterému rozumíte. Pomáháme i s podnikáním nově příchozích.</p>
               </div>
             </div>
           </div>
@@ -671,8 +662,24 @@
         <strong>Cookies a soukromí</strong>
         <p>Používáme jen nezbytné cookies pro fungování webu. Analytické a marketingové cookies aktivujeme pouze s vaším souhlasem. Více v <a href="zasady.html">zásadách ochrany osobních údajů</a>.</p>
       </div>
+      <div class="cookie-options">
+        <label class="cookie-opt">
+          <span><strong>Nezbytné</strong><small>Nutné pro provoz webu — vždy aktivní.</small></span>
+          <input type="checkbox" checked disabled aria-label="Nezbytné cookies (vždy aktivní)">
+        </label>
+        <label class="cookie-opt">
+          <span><strong>Analytické</strong><small>Anonymní statistiky návštěvnosti.</small></span>
+          <input type="checkbox" data-cat="analytics" aria-label="Analytické cookies">
+        </label>
+        <label class="cookie-opt">
+          <span><strong>Marketingové</strong><small>Měření reklam a remarketing.</small></span>
+          <input type="checkbox" data-cat="marketing" aria-label="Marketingové cookies">
+        </label>
+      </div>
       <div class="cookie-actions">
+        <button type="button" class="btn btn-ghost" data-consent="settings">Nastavení</button>
         <button type="button" class="btn btn-secondary" data-consent="deny">Odmítnout</button>
+        <button type="button" class="btn btn-primary" data-consent="save">Uložit volbu</button>
         <button type="button" class="btn btn-primary" data-consent="accept">Přijmout vše</button>
       </div>
     </div>

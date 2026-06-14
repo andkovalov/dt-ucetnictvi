@@ -12,8 +12,8 @@
   <meta name="theme-color" content="#16382A">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
   <link rel="apple-touch-icon" href="assets/icon-180.png">
-  <link rel="stylesheet" href="assets/style.css?v=12">
-  <script src="assets/consent.js?v=3" defer></script>
+  <link rel="stylesheet" href="assets/style.css?v=13">
+  <script src="assets/consent.js?v=4" defer></script>
 </head>
 <body class="legal-page">
 
@@ -130,8 +130,24 @@
         <strong>Cookies і приватність</strong>
         <p>Ми використовуємо лише необхідні cookies для роботи сайту. Аналітичні та маркетингові cookies вмикаємо тільки за вашою згодою.</p>
       </div>
+      <div class="cookie-options">
+        <label class="cookie-opt">
+          <span><strong>Необхідні</strong><small>Потрібні для роботи сайту — завжди активні.</small></span>
+          <input type="checkbox" checked disabled aria-label="Необхідні cookies (завжди активні)">
+        </label>
+        <label class="cookie-opt">
+          <span><strong>Аналітичні</strong><small>Анонімна статистика відвідувань.</small></span>
+          <input type="checkbox" data-cat="analytics" aria-label="Аналітичні cookies">
+        </label>
+        <label class="cookie-opt">
+          <span><strong>Маркетингові</strong><small>Вимірювання реклами та ремаркетинг.</small></span>
+          <input type="checkbox" data-cat="marketing" aria-label="Маркетингові cookies">
+        </label>
+      </div>
       <div class="cookie-actions">
+        <button type="button" class="btn btn-ghost" data-consent="settings">Налаштування</button>
         <button type="button" class="btn btn-secondary" data-consent="deny">Відхилити</button>
+        <button type="button" class="btn btn-primary" data-consent="save">Зберегти вибір</button>
         <button type="button" class="btn btn-primary" data-consent="accept">Прийняти все</button>
       </div>
     </div>

@@ -12,8 +12,8 @@
   <meta name="theme-color" content="#16382A">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
   <link rel="apple-touch-icon" href="assets/icon-180.png">
-  <link rel="stylesheet" href="assets/style.css?v=12">
-  <script src="assets/consent.js?v=3" defer></script>
+  <link rel="stylesheet" href="assets/style.css?v=13">
+  <script src="assets/consent.js?v=4" defer></script>
 </head>
 <body class="legal-page">
 
@@ -130,8 +130,24 @@
         <strong>Cookies a soukromí</strong>
         <p>Používáme jen nezbytné cookies pro fungování webu. Analytické a marketingové cookies aktivujeme pouze s vaším souhlasem.</p>
       </div>
+      <div class="cookie-options">
+        <label class="cookie-opt">
+          <span><strong>Nezbytné</strong><small>Nutné pro provoz webu — vždy aktivní.</small></span>
+          <input type="checkbox" checked disabled aria-label="Nezbytné cookies (vždy aktivní)">
+        </label>
+        <label class="cookie-opt">
+          <span><strong>Analytické</strong><small>Anonymní statistiky návštěvnosti.</small></span>
+          <input type="checkbox" data-cat="analytics" aria-label="Analytické cookies">
+        </label>
+        <label class="cookie-opt">
+          <span><strong>Marketingové</strong><small>Měření reklam a remarketing.</small></span>
+          <input type="checkbox" data-cat="marketing" aria-label="Marketingové cookies">
+        </label>
+      </div>
       <div class="cookie-actions">
+        <button type="button" class="btn btn-ghost" data-consent="settings">Nastavení</button>
         <button type="button" class="btn btn-secondary" data-consent="deny">Odmítnout</button>
+        <button type="button" class="btn btn-primary" data-consent="save">Uložit volbu</button>
         <button type="button" class="btn btn-primary" data-consent="accept">Přijmout vše</button>
       </div>
     </div>

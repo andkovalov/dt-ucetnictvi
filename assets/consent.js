@@ -1,9 +1,10 @@
 /* DT účetnictví Praha — cookie consent (GDPR / Google Consent Mode v2)
-   Tracking is blocked by default and only enabled after the user accepts. */
+   Granular categories. Everything is denied by default and enabled only
+   per the user's explicit choice. */
 (function () {
   "use strict";
 
-  var STORAGE_KEY = "dt-cookie-consent"; /* "granted" | "denied" */
+  var STORAGE_KEY = "dt-cookie-consent"; /* JSON: {analytics:bool, marketing:bool, v, ts} */
 
   /* === To turn on analytics later: set your GA4 ID here. ===
      Empty string = no tracking installed yet (banner still works). */
@@ -35,57 +36,90 @@
     gtag("config", GA_MEASUREMENT_ID, { anonymize_ip: true });
   }
 
-  function grant() {
+  function applyConsent(c) {
     gtag("consent", "update", {
-      ad_storage: "granted",
-      ad_user_data: "granted",
-      ad_personalization: "granted",
-      analytics_storage: "granted"
+      analytics_storage: c.analytics ? "granted" : "denied",
+      ad_storage: c.marketing ? "granted" : "denied",
+      ad_user_data: c.marketing ? "granted" : "denied",
+      ad_personalization: c.marketing ? "granted" : "denied"
     });
-    loadAnalytics();
+    if (c.analytics) loadAnalytics();
   }
 
   function readConsent() {
-    try { return localStorage.getItem(STORAGE_KEY); } catch (e) { return null; }
+    try {
+      var v = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      return (v && typeof v === "object") ? v : null;
+    } catch (e) { return null; }
   }
-  function writeConsent(value) {
-    try { localStorage.setItem(STORAGE_KEY, value); } catch (e) {}
-    if (value === "granted") grant();
+  function saveConsent(c) {
+    var v = { analytics: !!c.analytics, marketing: !!c.marketing, v: 1, ts: Date.now() };
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(v)); } catch (e) {}
+    applyConsent(v);
+    return v;
   }
 
-  function showBanner(banner) {
-    banner.removeAttribute("hidden");
-    void banner.offsetWidth;
-    banner.classList.add("show");
+  function showBanner(b) {
+    b.removeAttribute("hidden");
+    void b.offsetWidth;
+    b.classList.add("show");
   }
-  function hideBanner(banner) {
-    banner.classList.remove("show");
-    setTimeout(function () { banner.setAttribute("hidden", ""); }, 450);
+  function hideBanner(b) {
+    b.classList.remove("show");
+    setTimeout(function () {
+      b.setAttribute("hidden", "");
+      b.classList.remove("expanded");
+    }, 450);
   }
 
   document.addEventListener("DOMContentLoaded", function () {
     var banner = document.getElementById("cookieBanner");
     var stored = readConsent();
 
-    /* Re-apply an earlier "granted" choice on every page load */
-    if (stored === "granted") grant();
+    /* Re-apply an earlier choice on every page load */
+    if (stored) applyConsent(stored);
+    if (!banner) return;
 
-    if (banner) {
-      if (!stored) showBanner(banner);
-      banner.querySelectorAll("[data-consent]").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          var action = btn.getAttribute("data-consent");
-          if (action === "accept") { writeConsent("granted"); hideBanner(banner); }
-          else if (action === "deny") { writeConsent("denied"); hideBanner(banner); }
-        });
+    var toggles = banner.querySelectorAll("[data-cat]");
+    function setToggles(c) {
+      toggles.forEach(function (t) {
+        t.checked = c ? !!c[t.getAttribute("data-cat")] : false;
       });
     }
+    function readToggles() {
+      var o = {};
+      toggles.forEach(function (t) { o[t.getAttribute("data-cat")] = t.checked; });
+      return o;
+    }
 
-    /* "Cookie settings" re-opener (footer, any page) */
-    document.querySelectorAll('[data-consent="open"]').forEach(function (btn) {
-      btn.addEventListener("click", function (e) {
+    if (!stored) showBanner(banner);
+
+    banner.addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-consent]");
+      if (!btn) return;
+      var action = btn.getAttribute("data-consent");
+      if (action === "settings") {
+        setToggles(stored);
+        banner.classList.add("expanded");
+      } else if (action === "accept") {
+        saveConsent({ analytics: true, marketing: true });
+        hideBanner(banner);
+      } else if (action === "deny") {
+        saveConsent({ analytics: false, marketing: false });
+        hideBanner(banner);
+      } else if (action === "save") {
+        saveConsent(readToggles());
+        hideBanner(banner);
+      }
+    });
+
+    /* "Cookie settings" re-opener (footer, any page) — opens in settings mode */
+    document.querySelectorAll('[data-consent="open"]').forEach(function (b2) {
+      b2.addEventListener("click", function (e) {
         e.preventDefault();
-        if (banner) showBanner(banner);
+        setToggles(readConsent());
+        banner.classList.add("expanded");
+        showBanner(banner);
       });
     });
   });
