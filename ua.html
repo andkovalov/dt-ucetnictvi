@@ -33,8 +33,8 @@
   <link rel="preconnect" href="https://unpkg.com" crossorigin>
   <link rel="dns-prefetch" href="https://tile.openstreetmap.org">
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-  <link rel="stylesheet" href="assets/style.css?v=19">
-  <script src="assets/consent.js?v=4" defer></script>
+  <link rel="stylesheet" href="assets/style.css?v=20">
+  <script src="assets/prefs.js?v=1" defer></script>
 
   <script type="application/ld+json">
   {
@@ -633,7 +633,7 @@
         <span>© 2026 DT účetnictví Praha s.r.o. · IČO 17686181</span>
         <span class="footer-legal">
           <a href="zasady-ua.html">Політика конфіденційності</a>
-          <button type="button" class="footer-link" data-consent="open">Налаштування cookies</button>
+          <button type="button" class="footer-link" data-pref="open">Налаштування cookies</button>
         </span>
       </div>
     </div>
@@ -646,31 +646,31 @@
     </a>
   </div>
 
-  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Згода на використання cookies" hidden>
-    <div class="cookie-inner">
-      <div class="cookie-text">
+  <div class="pref-bar" id="prefBar" role="dialog" aria-live="polite" aria-label="Налаштування приватності" hidden>
+    <div class="pref-inner">
+      <div class="pref-text">
         <strong>Cookies і приватність</strong>
-        <p>Ми використовуємо лише необхідні cookies для роботи сайту. Аналітичні та маркетингові cookies вмикаємо тільки за вашою згодою. Докладніше в <a href="zasady-ua.html">політиці конфіденційності</a>.</p>
+        <p>Використовуємо cookies. Аналітичні та маркетингові — лише за вашою згодою. <a href="zasady-ua.html">Докладніше</a></p>
       </div>
-      <div class="cookie-options">
-        <label class="cookie-opt">
+      <div class="pref-options">
+        <label class="pref-opt">
           <span><strong>Необхідні</strong><small>Потрібні для роботи сайту — завжди активні.</small></span>
           <input type="checkbox" checked disabled aria-label="Необхідні cookies (завжди активні)">
         </label>
-        <label class="cookie-opt">
+        <label class="pref-opt">
           <span><strong>Аналітичні</strong><small>Анонімна статистика відвідувань.</small></span>
           <input type="checkbox" data-cat="analytics" aria-label="Аналітичні cookies">
         </label>
-        <label class="cookie-opt">
+        <label class="pref-opt">
           <span><strong>Маркетингові</strong><small>Вимірювання реклами та ремаркетинг.</small></span>
           <input type="checkbox" data-cat="marketing" aria-label="Маркетингові cookies">
         </label>
       </div>
-      <div class="cookie-actions">
-        <button type="button" class="btn btn-ghost" data-consent="settings">Налаштування</button>
-        <button type="button" class="btn btn-secondary" data-consent="deny">Відхилити</button>
-        <button type="button" class="btn btn-primary" data-consent="save">Зберегти вибір</button>
-        <button type="button" class="btn btn-primary" data-consent="accept">Прийняти все</button>
+      <div class="pref-actions">
+        <button type="button" class="btn btn-ghost" data-pref="settings">Налаштування</button>
+        <button type="button" class="btn btn-secondary" data-pref="deny">Відхилити</button>
+        <button type="button" class="btn btn-primary" data-pref="save">Зберегти вибір</button>
+        <button type="button" class="btn btn-primary" data-pref="accept">Прийняти все</button>
       </div>
     </div>
   </div>

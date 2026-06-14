@@ -12,8 +12,8 @@
   <meta name="theme-color" content="#16382A">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
   <link rel="apple-touch-icon" href="assets/icon-180.png">
-  <link rel="stylesheet" href="assets/style.css?v=19">
-  <script src="assets/consent.js?v=4" defer></script>
+  <link rel="stylesheet" href="assets/style.css?v=20">
+  <script src="assets/prefs.js?v=1" defer></script>
 </head>
 <body class="legal-page">
 
@@ -145,37 +145,37 @@
         <span>© 2026 DT účetnictví Praha s.r.o. · IČO 17686181</span>
         <span class="footer-legal">
           <a href="zasady.html">Zásady ochrany osobních údajů</a>
-          <button type="button" class="footer-link" data-consent="open">Nastavení cookies</button>
+          <button type="button" class="footer-link" data-pref="open">Nastavení cookies</button>
         </span>
       </div>
     </div>
   </footer>
 
-  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Souhlas s používáním cookies" hidden>
-    <div class="cookie-inner">
-      <div class="cookie-text">
+  <div class="pref-bar" id="prefBar" role="dialog" aria-live="polite" aria-label="Nastavení soukromí" hidden>
+    <div class="pref-inner">
+      <div class="pref-text">
         <strong>Cookies a soukromí</strong>
-        <p>Používáme jen nezbytné cookies pro fungování webu. Analytické a marketingové cookies aktivujeme pouze s vaším souhlasem.</p>
+        <p>Používáme cookies. Analytické a marketingové jen s vaším souhlasem.</p>
       </div>
-      <div class="cookie-options">
-        <label class="cookie-opt">
+      <div class="pref-options">
+        <label class="pref-opt">
           <span><strong>Nezbytné</strong><small>Nutné pro provoz webu — vždy aktivní.</small></span>
           <input type="checkbox" checked disabled aria-label="Nezbytné cookies (vždy aktivní)">
         </label>
-        <label class="cookie-opt">
+        <label class="pref-opt">
           <span><strong>Analytické</strong><small>Anonymní statistiky návštěvnosti.</small></span>
           <input type="checkbox" data-cat="analytics" aria-label="Analytické cookies">
         </label>
-        <label class="cookie-opt">
+        <label class="pref-opt">
           <span><strong>Marketingové</strong><small>Měření reklam a remarketing.</small></span>
           <input type="checkbox" data-cat="marketing" aria-label="Marketingové cookies">
         </label>
       </div>
-      <div class="cookie-actions">
-        <button type="button" class="btn btn-ghost" data-consent="settings">Nastavení</button>
-        <button type="button" class="btn btn-secondary" data-consent="deny">Odmítnout</button>
-        <button type="button" class="btn btn-primary" data-consent="save">Uložit volbu</button>
-        <button type="button" class="btn btn-primary" data-consent="accept">Přijmout vše</button>
+      <div class="pref-actions">
+        <button type="button" class="btn btn-ghost" data-pref="settings">Nastavení</button>
+        <button type="button" class="btn btn-secondary" data-pref="deny">Odmítnout</button>
+        <button type="button" class="btn btn-primary" data-pref="save">Uložit volbu</button>
+        <button type="button" class="btn btn-primary" data-pref="accept">Přijmout vše</button>
       </div>
     </div>
   </div>

@@ -1,13 +1,14 @@
-/* DT účetnictví Praha — cookie consent (GDPR / Google Consent Mode v2)
+/* DT účetnictví Praha — privacy preferences (GDPR / Google Consent Mode v2)
    Granular categories. Everything is denied by default and enabled only
-   per the user's explicit choice. */
+   per the user's explicit choice. Neutral class/id/file names so privacy
+   filter lists don't hide the bar. */
 (function () {
   "use strict";
 
-  var STORAGE_KEY = "dt-cookie-consent"; /* JSON: {analytics:bool, marketing:bool, v, ts} */
+  var STORAGE_KEY = "dt-prefs"; /* JSON: {analytics:bool, marketing:bool, v, ts} */
 
   /* === To turn on analytics later: set your GA4 ID here. ===
-     Empty string = no tracking installed yet (banner still works). */
+     Empty string = no tracking installed yet (bar still works). */
   var GA_MEASUREMENT_ID = "";
 
   /* --- Consent Mode v2: deny everything BEFORE any tag loads --- */
@@ -59,12 +60,12 @@
     return v;
   }
 
-  function showBanner(b) {
+  function showBar(b) {
     b.removeAttribute("hidden");
     void b.offsetWidth;
     b.classList.add("show");
   }
-  function hideBanner(b) {
+  function hideBar(b) {
     b.classList.remove("show");
     setTimeout(function () {
       b.setAttribute("hidden", "");
@@ -73,14 +74,14 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    var banner = document.getElementById("cookieBanner");
+    var bar = document.getElementById("prefBar");
     var stored = readConsent();
 
     /* Re-apply an earlier choice on every page load */
     if (stored) applyConsent(stored);
-    if (!banner) return;
+    if (!bar) return;
 
-    var toggles = banner.querySelectorAll("[data-cat]");
+    var toggles = bar.querySelectorAll("[data-cat]");
     function setToggles(c) {
       toggles.forEach(function (t) {
         t.checked = c ? !!c[t.getAttribute("data-cat")] : false;
@@ -92,34 +93,34 @@
       return o;
     }
 
-    if (!stored) showBanner(banner);
+    if (!stored) showBar(bar);
 
-    banner.addEventListener("click", function (e) {
-      var btn = e.target.closest("[data-consent]");
+    bar.addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-pref]");
       if (!btn) return;
-      var action = btn.getAttribute("data-consent");
+      var action = btn.getAttribute("data-pref");
       if (action === "settings") {
         setToggles(stored);
-        banner.classList.add("expanded");
+        bar.classList.add("expanded");
       } else if (action === "accept") {
         saveConsent({ analytics: true, marketing: true });
-        hideBanner(banner);
+        hideBar(bar);
       } else if (action === "deny") {
         saveConsent({ analytics: false, marketing: false });
-        hideBanner(banner);
+        hideBar(bar);
       } else if (action === "save") {
         saveConsent(readToggles());
-        hideBanner(banner);
+        hideBar(bar);
       }
     });
 
-    /* "Cookie settings" re-opener (footer, any page) — opens in settings mode */
-    document.querySelectorAll('[data-consent="open"]').forEach(function (b2) {
+    /* "Preferences" re-opener (footer, any page) — opens in settings mode */
+    document.querySelectorAll('[data-pref="open"]').forEach(function (b2) {
       b2.addEventListener("click", function (e) {
         e.preventDefault();
         setToggles(readConsent());
-        banner.classList.add("expanded");
-        showBanner(banner);
+        bar.classList.add("expanded");
+        showBar(bar);
       });
     });
   });
