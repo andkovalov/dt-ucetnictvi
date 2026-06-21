@@ -753,7 +753,8 @@ h3 { font-size: 1.25rem; line-height: 1.3; }
   box-shadow: var(--shadow-card);
 }
 .contact-cta-card h3 { font-size: 1.4rem; margin-bottom: 12px; }
-.contact-cta-card > p { color: var(--ink-70); margin-bottom: 26px; }
+/* intro paragraph of either tab panel (not the .micro footnote) */
+.contact-cta-card .cta-panel > p:not(.micro) { color: var(--ink-70); margin-bottom: 26px; }
 .consult-row {
   display: flex; justify-content: space-between; align-items: center; gap: 12px;
   border: 1px solid var(--line);
