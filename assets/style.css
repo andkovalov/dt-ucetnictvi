@@ -178,6 +178,7 @@ img, svg { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
 button { font: inherit; cursor: pointer; border: none; background: none; }
+[hidden] { display: none !important; } /* keep the hidden attribute reliable even when an element sets display */
 
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
 .cta-banner :focus-visible, .marquee :focus-visible { outline-color: var(--cream); }
@@ -766,10 +767,76 @@ h3 { font-size: 1.25rem; line-height: 1.3; }
 .contact-cta-card .btn { width: 100%; margin-top: 16px; }
 .contact-cta-card .micro { margin-top: 14px; text-align: center; font-size: .82rem; color: var(--ink-50); }
 
+/* Contact card: consultation / lead-form toggle */
+.cta-toggle {
+  display: flex;
+  background: rgba(27,42,34,.06);
+  border-radius: 999px;
+  padding: 5px;
+  margin-bottom: 26px;
+}
+.cta-toggle-btn {
+  flex: 1;
+  padding: 11px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .92rem;
+  color: var(--ink-50);
+  transition: color .2s, background .2s, box-shadow .2s;
+}
+.cta-toggle-btn.active { background: var(--white); color: var(--ink); box-shadow: 0 2px 8px rgba(27,42,34,.12); }
+
+.cta-panel { display: none; }
+.cta-panel.active { display: block; }
+
+/* Lead form */
+.lead-form { display: grid; gap: 14px; }
+.lead-form .field { display: grid; gap: 6px; }
+.lead-form label { font-size: .85rem; font-weight: 600; color: var(--ink-70); }
+.lead-form label span { color: var(--ink-50); font-weight: 500; }
+.lead-form input,
+.lead-form textarea {
+  font: inherit;
+  font-size: .95rem;
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--cream-soft);
+  color: var(--ink);
+  transition: border-color .2s, background .2s;
+}
+.lead-form input::placeholder, .lead-form textarea::placeholder { color: var(--ink-50); }
+.lead-form input:focus, .lead-form textarea:focus { outline: none; border-color: var(--accent); background: var(--white); }
+.lead-form textarea { resize: vertical; min-height: 88px; }
+/* error styling only after the field has been interacted with */
+.lead-form input:user-invalid, .lead-form textarea:user-invalid { border-color: #C0392B; background: #FCEFED; }
+.lead-form .btn { width: 100%; margin-top: 4px; }
+.lead-form .btn[disabled] { opacity: .7; cursor: default; }
+.lead-form .micro { margin-top: 8px; text-align: center; font-size: .82rem; color: var(--ink-50); }
+
+.lead-success {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  text-align: center;
+  padding: 22px 8px;
+}
+.lead-success-icon {
+  width: 52px; height: 52px;
+  border-radius: 999px;
+  display: grid; place-items: center;
+  background: #E3F6E8; color: #14803C;
+  margin-bottom: 4px;
+}
+.lead-success strong { font-size: 1.2rem; }
+.lead-success p { color: var(--ink-70); font-size: .95rem; }
+
 /* ---------- Contact map ---------- */
 
 .contact-map {
   position: relative;
+  isolation: isolate; /* contain Leaflet's high z-index panes/controls so the map never paints over header, menu or sticky CTA */
   margin-top: clamp(28px, 4vw, 48px);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -799,12 +866,12 @@ h3 { font-size: 1.25rem; line-height: 1.3; }
   padding: 20px 24px;
   transform: translateY(150%);
   opacity: 0;
-  transition: transform .28s var(--ease-out), opacity .2s ease;
+  transition: transform .28s var(--ease-out), opacity .2s ease, bottom .35s var(--ease-out);
 }
 .pref-bar.show {
   transform: translateY(0);
   opacity: 1;
-  transition: transform .45s cubic-bezier(.32, .72, 0, 1), opacity .3s ease;
+  transition: transform .45s cubic-bezier(.32, .72, 0, 1), opacity .3s ease, bottom .35s var(--ease-out);
 }
 .pref-inner { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
 .pref-text { flex: 1; min-width: 240px; }
@@ -963,13 +1030,23 @@ html.no-motion .reveal, html.no-js .reveal { opacity: 1; }
 @media (max-width: 760px) {
   body { font-size: 16px; padding-bottom: 84px; }
   .header-actions .btn-primary, .header-actions .lang-switch { display: none; }
-  .mobile-cta { display: flex; }
-  .pref-bar { bottom: calc(80px + env(safe-area-inset-bottom)); }
+  .mobile-cta {
+    display: flex;
+    transform: translateY(130%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .4s var(--ease-out), opacity .3s ease;
+  }
+  .mobile-cta.cta-visible { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  /* Cookie bar sits low while the CTA is hidden, lifts above it once the CTA appears */
+  .pref-bar { bottom: calc(16px + env(safe-area-inset-bottom)); }
+  .mobile-cta.cta-visible ~ .pref-bar { bottom: calc(80px + env(safe-area-inset-bottom)); }
 }
 
 @media (max-width: 560px) {
   .pricing-grid, .pricing-grid.cols-4 { grid-template-columns: 1fr; }
   .services-grid { grid-template-columns: 1fr; }
+  .service-card.featured { grid-column: auto; }
   .numbers-grid { grid-template-columns: repeat(2, 1fr); }
   .number-card { padding: 20px 18px; }
   .hero-cta .btn { width: 100%; white-space: normal; }

@@ -33,7 +33,7 @@
   <link rel="preconnect" href="https://unpkg.com" crossorigin>
   <link rel="dns-prefetch" href="https://tile.openstreetmap.org">
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-  <link rel="stylesheet" href="assets/style.css?v=21">
+  <link rel="stylesheet" href="assets/style.css?v=25">
   <script src="assets/prefs.js?v=1" defer></script>
 
   <script type="application/ld+json">
@@ -193,8 +193,8 @@
     <!-- ============ MARQUEE ============ -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track">
-        <span>Vedení účetnictví <i>✳</i> Daňová přiznání <i>✳</i> DPH a kontrolní hlášení <i>✳</i> Mzdová agenda <i>✳</i> Daňová optimalizace <i>✳</i> Zastupování před úřady <i>✳</i> Fakturace <i>✳</i> </span>
-        <span>Vedení účetnictví <i>✳</i> Daňová přiznání <i>✳</i> DPH a kontrolní hlášení <i>✳</i> Mzdová agenda <i>✳</i> Daňová optimalizace <i>✳</i> Zastupování před úřady <i>✳</i> Fakturace <i>✳</i> </span>
+        <span>Vedení účetnictví <i>✦</i> Daňová přiznání <i>✦</i> DPH a kontrolní hlášení <i>✦</i> Mzdová agenda <i>✦</i> Daňová optimalizace <i>✦</i> Zastupování před úřady <i>✦</i> Fakturace <i>✦</i> </span>
+        <span>Vedení účetnictví <i>✦</i> Daňová přiznání <i>✦</i> DPH a kontrolní hlášení <i>✦</i> Mzdová agenda <i>✦</i> Daňová optimalizace <i>✦</i> Zastupování před úřady <i>✦</i> Fakturace <i>✦</i> </span>
       </div>
     </div>
 
@@ -568,21 +568,60 @@
           </div>
         </div>
         <div class="contact-cta-card reveal">
-          <h3>Začněte konzultací online</h3>
-          <p>Nejrychlejší cesta, jak zjistit, co vaše účetnictví potřebuje. Vyberte si termín, který vám sedí.</p>
-          <div class="consult-row">
-            <span>Účetní online konzultace · 30 min</span>
-            <b>1 000 Kč</b>
+          <div class="cta-toggle" role="tablist" aria-label="Způsob kontaktu">
+            <button class="cta-toggle-btn active" role="tab" aria-selected="true" aria-controls="cta-konzultace" id="cta-tab-konzultace" type="button">Konzultace</button>
+            <button class="cta-toggle-btn" role="tab" aria-selected="false" aria-controls="cta-poptavka" id="cta-tab-poptavka" type="button">Poptávka</button>
           </div>
-          <div class="consult-row">
-            <span>Účetní online konzultace · 1 hodina</span>
-            <b>1 900 Kč</b>
+
+          <div class="cta-panel active" id="cta-konzultace" role="tabpanel" aria-labelledby="cta-tab-konzultace">
+            <h3>Začněte konzultací online</h3>
+            <p>Nejrychlejší cesta, jak zjistit, co vaše účetnictví potřebuje. Vyberte si termín, který vám sedí.</p>
+            <div class="consult-row">
+              <span>Účetní online konzultace · 30 min</span>
+              <b>1 000 Kč</b>
+            </div>
+            <div class="consult-row">
+              <span>Účetní online konzultace · 1 hodina</span>
+              <b>1 900 Kč</b>
+            </div>
+            <a class="btn btn-primary" href="https://diana-romanukova.reservio.com/services" target="_blank" rel="noopener">
+              Vybrat termín
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <p class="micro">Rezervace přes Reservio · potvrzení a odkaz na videohovor e-mailem</p>
           </div>
-          <a class="btn btn-primary" href="https://diana-romanukova.reservio.com/services" target="_blank" rel="noopener">
-            Vybrat termín
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-          <p class="micro">Rezervace přes Reservio · potvrzení a odkaz na videohovor e-mailem</p>
+
+          <div class="cta-panel" id="cta-poptavka" role="tabpanel" aria-labelledby="cta-tab-poptavka" hidden>
+            <h3>Nezávazná poptávka</h3>
+            <p>Napište nám a ozveme se vám zpět — obvykle do jednoho pracovního dne.</p>
+            <!-- Front-end only: submit is simulated in main.js. Wire a real endpoint (FormSubmit/Formspree) when ready. -->
+            <form class="lead-form" novalidate>
+              <div class="field">
+                <label for="lf-name">Jméno</label>
+                <input id="lf-name" name="name" type="text" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="lf-contact">Telefon nebo e-mail</label>
+                <input id="lf-contact" name="contact" type="text" autocomplete="email" required>
+              </div>
+              <div class="field">
+                <label for="lf-message">Zpráva <span>(nepovinné)</span></label>
+                <textarea id="lf-message" name="message" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" data-sending="Odesílám…">
+                Odeslat poptávku
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              </button>
+              <p class="micro">Ozveme se vám co nejdříve · Vaše údaje použijeme jen pro odpověď na poptávku</p>
+            </form>
+            <div class="lead-success" role="status" hidden>
+              <span class="lead-success-icon" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              <strong>Děkujeme!</strong>
+              <p>Vaši poptávku máme. Ozveme se vám co nejdříve.</p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="container">
@@ -711,6 +750,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
-  <script src="assets/main.js?v=7"></script>
+  <script src="assets/main.js?v=10"></script>
 </body>
 </html>

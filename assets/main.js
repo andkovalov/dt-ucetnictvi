@@ -10,12 +10,21 @@
     document.documentElement.classList.add("no-motion");
   }
 
-  /* ---------- Header state ---------- */
+  /* ---------- Header state + sticky mobile CTA reveal ---------- */
   var header = document.querySelector(".header");
+  var mobileCta = document.querySelector(".mobile-cta");
+  // Reveal the floating CTA only once the user scrolls from the hero into the second section.
+  var ctaAnchor = document.querySelector(".marquee") || document.querySelector(".numbers");
   function onScroll() {
-    header.classList.toggle("scrolled", window.scrollY > 10);
+    var y = window.scrollY;
+    header.classList.toggle("scrolled", y > 10);
+    if (mobileCta) {
+      var trigger = ctaAnchor ? ctaAnchor.offsetTop - window.innerHeight * 0.9 : window.innerHeight;
+      mobileCta.classList.toggle("cta-visible", y > trigger);
+    }
   }
   window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
   onScroll();
 
   /* ---------- Mobile menu ---------- */
@@ -71,6 +80,48 @@
       }
     });
   });
+
+  /* ---------- Contact card: consultation / lead-form toggle ---------- */
+  var ctaToggle = document.querySelectorAll(".cta-toggle-btn");
+  var ctaPanels = document.querySelectorAll(".cta-panel");
+  ctaToggle.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      ctaToggle.forEach(function (b) {
+        var on = b === btn;
+        b.classList.toggle("active", on);
+        b.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      ctaPanels.forEach(function (p) {
+        var on = p.id === btn.getAttribute("aria-controls");
+        p.classList.toggle("active", on);
+        p.hidden = !on;
+      });
+    });
+  });
+
+  /* ---------- Lead form (front-end only — no backend wired yet) ----------
+     Validates and shows a success state without sending anything.
+     To go live, replace the setTimeout block with a fetch() POST to a form
+     endpoint (e.g. FormSubmit/Formspree) and reveal .lead-success on success. */
+  var leadForm = document.querySelector(".lead-form");
+  if (leadForm) {
+    leadForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!leadForm.checkValidity()) { leadForm.reportValidity(); return; }
+      var submitBtn = leadForm.querySelector("button[type=submit]");
+      var original = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = submitBtn.getAttribute("data-sending") || "Odesílám…";
+      setTimeout(function () {
+        var success = leadForm.parentNode.querySelector(".lead-success");
+        leadForm.hidden = true;
+        if (success) success.hidden = false;
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = original;
+        leadForm.reset();
+      }, 650);
+    });
+  }
 
   /* ---------- FAQ: allow only one open ---------- */
   var faqItems = document.querySelectorAll(".faq-item");
