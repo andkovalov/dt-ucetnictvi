@@ -1048,7 +1048,8 @@ html.no-motion .reveal, html.no-js .reveal { opacity: 1; }
   .services-grid { grid-template-columns: 1fr; }
   .service-card.featured { grid-column: auto; }
   .numbers-grid { grid-template-columns: repeat(2, 1fr); }
-  .number-card { padding: 20px 18px; }
+  /* flush-left + uniform padding so both rows line up (override the desktop divider reset) */
+  .number-card, .number-card + .number-card { padding: 20px 18px 20px 0; }
   .hero-cta .btn { width: 100%; white-space: normal; }
   .mobile-cta .btn { white-space: normal; }
   .pref-actions { width: 100%; }
