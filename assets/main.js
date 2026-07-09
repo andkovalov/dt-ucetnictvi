@@ -185,6 +185,22 @@
     }
   }
 
+  /* ---------- Video: click-to-load (privacy-friendly, youtube-nocookie) ---------- */
+  document.querySelectorAll(".video-embed[data-yt]").forEach(function (box) {
+    box.addEventListener("click", function () {
+      if (box.dataset.loaded) return;
+      box.dataset.loaded = "1";
+      var id = box.getAttribute("data-yt");
+      var iframe = document.createElement("iframe");
+      iframe.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0";
+      iframe.title = box.getAttribute("data-title") || "Video";
+      iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+      iframe.setAttribute("allowfullscreen", "");
+      box.innerHTML = "";
+      box.appendChild(iframe);
+    });
+  });
+
   if (!hasGsap || reduceMotion) return;
 
   /* ---------- GSAP ---------- */

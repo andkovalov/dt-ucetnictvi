@@ -663,6 +663,45 @@ h3 { font-size: 1.25rem; line-height: 1.3; }
 .step-card h3 { margin-bottom: 10px; font-size: 1.12rem; }
 .step-card p { font-size: .94rem; color: var(--ink-70); }
 
+/* ---------- Video / media ---------- */
+
+.video-sec { background: var(--cream-soft); border-block: 1px solid var(--line); }
+.video-embed {
+  position: relative;
+  max-width: 900px;
+  margin-inline: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  background: var(--tint);
+  cursor: pointer;
+}
+.video-embed picture, .video-embed img, .video-embed iframe {
+  width: 100%; height: 100%; display: block; border: 0;
+}
+.video-embed img { object-fit: cover; transition: transform .4s var(--ease-out); }
+.video-embed::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(11,33,24,.10), rgba(11,33,24,.28));
+  pointer-events: none; transition: opacity .3s ease;
+}
+.video-play {
+  position: absolute; inset: 0; margin: auto;
+  width: 84px; height: 84px; border-radius: 999px;
+  background: var(--accent); color: #fff;
+  display: grid; place-items: center; z-index: 1;
+  box-shadow: var(--shadow-pop);
+  transition: transform .18s var(--ease-out), background .2s var(--ease-out);
+}
+.video-play svg { margin-left: 4px; }
+@media (hover: hover) and (pointer: fine) {
+  .video-embed:hover img { transform: scale(1.03); }
+  .video-embed:hover .video-play { transform: scale(1.07); background: var(--accent-deep); }
+}
+.video-embed[data-loaded] { cursor: default; background: #000; }
+.video-embed[data-loaded]::after { opacity: 0; }
+
 /* ---------- CTA banner ---------- */
 
 .cta-banner {
